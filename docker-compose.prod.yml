@@ -3,23 +3,23 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: rossiaerospace-web
+    container_name: rossiuas-web
     restart: unless-stopped
     networks:
       - easypanel
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=easypanel"
-      - "traefik.http.routers.rossiaerospace.rule=Host(`rossiaerospace.dev.soberanus.online`)"
-      - "traefik.http.routers.rossiaerospace.entrypoints=https"
-      - "traefik.http.routers.rossiaerospace.tls=true"
-      - "traefik.http.routers.rossiaerospace.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.rossiaerospace.service=rossiaerospace"
-      - "traefik.http.routers.rossiaerospace-http.rule=Host(`rossiaerospace.dev.soberanus.online`)"
-      - "traefik.http.routers.rossiaerospace-http.entrypoints=http"
-      - "traefik.http.routers.rossiaerospace-http.middlewares=redirect-to-https@file"
-      - "traefik.http.routers.rossiaerospace-http.service=rossiaerospace"
-      - "traefik.http.services.rossiaerospace.loadbalancer.server.port=80"
+      - "traefik.http.routers.rossiuas.rule=Host(`rossiuas.dev.soberanus.online`)"
+      - "traefik.http.routers.rossiuas.entrypoints=https"
+      - "traefik.http.routers.rossiuas.tls=true"
+      - "traefik.http.routers.rossiuas.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.rossiuas.service=rossiuas"
+      - "traefik.http.routers.rossiuas-http.rule=Host(`rossiuas.dev.soberanus.online`)"
+      - "traefik.http.routers.rossiuas-http.entrypoints=http"
+      - "traefik.http.routers.rossiuas-http.middlewares=redirect-to-https@file"
+      - "traefik.http.routers.rossiuas-http.service=rossiuas"
+      - "traefik.http.services.rossiuas.loadbalancer.server.port=80"
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://127.0.0.1/healthz"]
       interval: 30s
