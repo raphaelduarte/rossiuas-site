@@ -57,18 +57,36 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .nav-cta:hover::before{transform:translateX(100%)}
 @media(max-width:980px){.nav-links{display:none}.nav{padding:12px 18px}}
 
-/* HERO compact, single-fold */
+/* HERO full-bleed photo-driven (Voliro / SkySafe inspired) */
 .hero{position:relative;min-height:100vh;height:100vh;display:grid;grid-template-rows:auto 1fr auto;overflow:hidden;padding:0}
-.hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(60% 70% at 80% 30%,rgba(30,91,255,.16) 0%,transparent 60%),radial-gradient(50% 60% at 10% 80%,rgba(225,29,42,.12) 0%,transparent 60%),linear-gradient(180deg,transparent 0%,var(--bg) 100%)}
-#radar{position:absolute;inset:0;z-index:1;opacity:.45;mix-blend-mode:screen;pointer-events:none}
+.hero-photo{position:absolute;inset:0;z-index:0;overflow:hidden}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 50%;filter:grayscale(.4) contrast(1.08) brightness(.6) saturate(.8)}
+.hero-photo::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,8,16,.45) 0%,rgba(5,8,16,.55) 35%,rgba(5,8,16,.85) 100%),linear-gradient(95deg,rgba(5,8,16,.78) 0%,rgba(5,8,16,.35) 50%,rgba(5,8,16,.2) 100%);z-index:1}
+.hero-photo::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 70% at 80% 30%,rgba(30,91,255,.2) 0%,transparent 65%),radial-gradient(50% 60% at 10% 80%,rgba(225,29,42,.12) 0%,transparent 65%);z-index:1;mix-blend-mode:screen}
+#radar{position:absolute;inset:0;z-index:2;opacity:.32;mix-blend-mode:screen;pointer-events:none}
 
 .hero-meta{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:78px 32px 0;font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--fg-mute)}
 .hero-meta .live{display:flex;align-items:center;gap:8px;color:var(--fg-soft)}
 .hero-meta .live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--red-hot);box-shadow:0 0 10px var(--red-hot);animation:blink 1.4s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
-.hero-body{position:relative;z-index:2;padding:28px 32px;display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center;max-width:1500px;margin:0 auto;width:100%}
-.hero-text{display:flex;flex-direction:column;gap:0}
+.hero-body{position:relative;z-index:3;padding:32px 32px;display:flex;align-items:center;max-width:1500px;margin:0 auto;width:100%}
+.hero-text{display:flex;flex-direction:column;gap:0;max-width:780px}
+/* Technical markers in corners — aerospace tactical feel */
+.hero-marker{position:absolute;z-index:3;font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--fg-soft);background:rgba(10,15,28,.6);padding:5px 9px;border:1px solid var(--line-2);backdrop-filter:blur(8px);pointer-events:none}
+.hero-marker .k{color:var(--fg-mute);margin-right:6px}
+.hero-marker .v{color:var(--fg)}
+.hero-marker.tr{top:96px;right:32px}
+.hero-marker.br{bottom:110px;right:32px;color:var(--red-hot);border-color:rgba(225,29,42,.4);background:rgba(40,8,12,.65)}
+.hero-marker.br .k{color:rgba(255,180,180,.7)}
+.hero-marker.br .v{color:var(--red-hot)}
+.hero-cross{position:absolute;z-index:3;width:24px;height:24px;border:1px solid var(--red-hot);opacity:.55}
+.hero-cross::before,.hero-cross::after{content:"";position:absolute;background:var(--red-hot)}
+.hero-cross::before{left:50%;top:-6px;bottom:-6px;width:1px;transform:translateX(-50%)}
+.hero-cross::after{top:50%;left:-6px;right:-6px;height:1px;transform:translateY(-50%)}
+.hero-cross.tr{top:118px;right:120px}
+.hero-cross.bl{bottom:130px;left:32px}
+@media(max-width:880px){.hero-marker,.hero-cross{display:none}}
 .hero-tagline{display:inline-flex;align-items:center;gap:14px;font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--fg-soft);margin-bottom:22px}
 .hero-tagline .ln{width:42px;height:1px;background:var(--red);position:relative}
 .hero-tagline .ln::after{content:"";position:absolute;right:-3px;top:-2px;width:5px;height:5px;background:var(--red-hot);border-radius:50%}
@@ -278,9 +296,9 @@ section{position:relative;z-index:2;padding:110px 32px}
 .dsheet-header .ttl{color:var(--fg);font-weight:700;font-size:11.5px;display:flex;align-items:center;gap:10px}
 .dsheet-header .ttl::before{content:"";width:8px;height:8px;background:var(--red-hot);border-radius:50%;box-shadow:0 0 8px var(--red-hot)}
 .dsheet-header .rev{color:var(--red-hot)}
-.dsheet-mid{position:relative;z-index:2;border:1px solid var(--line);border-radius:3px;background:rgba(10,15,28,.5);aspect-ratio:5/3;overflow:hidden;margin-bottom:16px}
+.dsheet-mid{position:relative;z-index:2;border:1px solid var(--line);border-radius:3px;background:#0a0e16;aspect-ratio:16/10;overflow:hidden;margin-bottom:16px}
 .dsheet-mid svg{width:100%;height:100%;display:block}
-.dsheet-photo{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1) contrast(1.15) brightness(.85)}
+.dsheet-photo{width:100%;height:100%;object-fit:cover;object-position:50% 50%;display:block;filter:grayscale(.5) contrast(1.1) brightness(.78) saturate(.85)}
 .dsheet-tint{position:absolute;inset:0;background:linear-gradient(135deg,rgba(225,29,42,.32) 0%,rgba(8,12,30,.55) 45%,rgba(30,91,255,.38) 100%);mix-blend-mode:screen;pointer-events:none}
 .dsheet-mid::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%,rgba(5,8,16,.5) 100%);pointer-events:none}
 .dsheet-overlay{position:absolute;inset:0;display:flex;justify-content:space-between;align-items:flex-start;padding:10px 12px;font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;pointer-events:none;z-index:3}
@@ -407,7 +425,9 @@ footer .legal{margin-top:48px;padding-top:22px;border-top:1px solid var(--line);
 </nav>
 
 <section class="hero" id="top">
-  <div class="hero-bg"></div>
+  <div class="hero-photo">
+    <img src="img/hero-uas.jpg" alt="High-endurance fixed-wing UAS silhouette at dusk" />
+  </div>
   <canvas id="radar"></canvas>
 
   <div class="hero-meta">
@@ -415,6 +435,11 @@ footer .legal{margin-top:48px;padding-top:22px;border-top:1px solid var(--line);
     <span class="live">Mission Status · Operational</span>
     <span>34.0522° N · 118.2437° W</span>
   </div>
+
+  <span class="hero-marker tr" aria-hidden="true"><span class="k">Frame</span><span class="v">LR-1 ENVOY · CL</span></span>
+  <span class="hero-marker br" aria-hidden="true"><span class="k">Concept</span><span class="v">REPRESENTATIVE</span></span>
+  <span class="hero-cross tr" aria-hidden="true"></span>
+  <span class="hero-cross bl" aria-hidden="true"></span>
 
   <div class="hero-body">
     <div class="hero-text">
@@ -433,7 +458,7 @@ footer .legal{margin-top:48px;padding-top:22px;border-top:1px solid var(--line);
       </div>
     </div>
 
-    <div class="hero-schematic" aria-hidden="true">
+    <div class="hero-schematic-OFF" style="display:none" aria-hidden="true">
       <div class="schematic-frame"></div>
       <div class="schem-corners"><span></span><span></span></div>
       <div class="schem-label tl"><span class="k">CALL SIGN</span><span class="v">LR-1 / ENVOY</span></div>
@@ -764,7 +789,7 @@ footer .legal{margin-top:48px;padding-top:22px;border-top:1px solid var(--line);
 
     <div class="ops-panel reveal">
       <div class="ops-photo" aria-hidden="true">
-        <img src="https://images.unsplash.com/photo-1729183611572-783b38c56b5b?w=1400&q=80&auto=format&fit=crop" alt="" loading="lazy"/>
+        <img src="img/divider-hangar.jpg" alt="" loading="lazy"/>
         <div class="ops-photo-tint"></div>
       </div>
       <div class="head">
@@ -832,7 +857,7 @@ footer .legal{margin-top:48px;padding-top:22px;border-top:1px solid var(--line);
       </div>
 
       <div class="dsheet-mid">
-        <img class="dsheet-photo" src="https://images.unsplash.com/photo-1731579884331-95c1da04e988?w=1200&q=85&auto=format&fit=crop" alt="High-endurance fixed-wing UAS representative imagery" loading="lazy"/>
+        <img class="dsheet-photo" src="img/founder-uas.jpg" alt="Fixed-wing UAS representative imagery" loading="lazy"/>
         <div class="dsheet-tint"></div>
         <div class="dsheet-overlay">
           <span class="t-l">CONCEPT · LR-1 ENVOY</span>
