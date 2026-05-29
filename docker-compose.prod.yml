@@ -1,0 +1,32 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rossiaerospace-web
+    restart: unless-stopped
+    networks:
+      - easypanel
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=easypanel"
+      - "traefik.http.routers.rossiaerospace.rule=Host(`rossiaerospace.dev.soberanus.online`)"
+      - "traefik.http.routers.rossiaerospace.entrypoints=https"
+      - "traefik.http.routers.rossiaerospace.tls=true"
+      - "traefik.http.routers.rossiaerospace.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.rossiaerospace.service=rossiaerospace"
+      - "traefik.http.routers.rossiaerospace-http.rule=Host(`rossiaerospace.dev.soberanus.online`)"
+      - "traefik.http.routers.rossiaerospace-http.entrypoints=http"
+      - "traefik.http.routers.rossiaerospace-http.middlewares=redirect-to-https@file"
+      - "traefik.http.routers.rossiaerospace-http.service=rossiaerospace"
+      - "traefik.http.services.rossiaerospace.loadbalancer.server.port=80"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+networks:
+  easypanel:
+    external: true
